@@ -312,18 +312,13 @@ with tab2:
         else:
             z_alpha = stats.norm.ppf(1 - alpha)
         z_beta = stats.norm.ppf(power)
-
-
         r_effect = effect_size_mw
-
-
         d_equivalent = 2 * r_effect / math.sqrt(1 - r_effect ** 2)
 
         r = allocation_ratio
         nA = math.ceil(
             ((z_alpha + z_beta) ** 2 * (1 + 1.0 / r)) / (d_equivalent ** 2) * 1.05)
         nB = math.ceil(r * nA)
-
         st.success(f"""
             Рекомендуемый размер выборки (Mann-Whitney U):
             - n_A = {nA:,}
@@ -468,4 +463,5 @@ with tab3:
                 st.write(f"U = {u_stat:.2f}, p-value = {pval:.4f}")
                 st.write("Интерпретация: " + ("Отвергаем H0" if pval < alpha else "Не отвергаем H0"))
             except Exception as e:
+
                 st.error("Ошибка чтения данных: " + str(e))
